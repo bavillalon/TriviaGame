@@ -1,3 +1,6 @@
+//List of questions. this is an array of objects. I wasn't as ambitious as last time and didn't put everything in one 
+//overall object. sorry.
+
 var questions=[
         {
             q:"Which of these is NOT a meal that hobbits eat?",
@@ -48,15 +51,17 @@ var questions=[
             correct: "Nine"
         }
     ];
-
+//timer to get time, questionIntervl to keep track of the timer. on question to keep track of the index of the question we are on.
+//logical to check if the clock is running. and counters fo rthe answers.
 var timer;
 var questionInterval;
-var timerInterval;
 var onQuestion=0;
 var clockRunning=false;
 var correctAnswers=0;
 var wrongAnswers=0;
 var unanswered=0;
+
+//reset timer to reset the timer and clear the element of the the text
 
 function resetTimer() {
     clearInterval(questionInterval);
@@ -65,9 +70,8 @@ function resetTimer() {
     $("#timer").empty();
   };
 
+  //starting the timer to keep track of the time left and display the initial time remaining. the rest of the time remaining will be displayed in the count funciton.
   function startTimer() {
-  
-    // DONE: Use setInterval to start the count here and set the clock to running.
     if (!clockRunning) {
         $("#timer").show();
         $("#timer").text(timer + " seconds remaining");
@@ -77,6 +81,10 @@ function resetTimer() {
     }
   };
 
+  //count decrements the timer by one when called bu the set interval funciton.
+  //I am also keeping track of whether the time is up and displaying the correct response and clearing the game screen accordingly.
+  //there is also logic here to end the game should it get there. I should ahve added the end game stuff to a function but alas I am too lazy.
+  //there is ALSOo logic to go to the next question after a delay which also should have gone in another function.
   function count() {
 
     // DONE: decrement time by 1.
@@ -105,7 +113,7 @@ function resetTimer() {
     }
   };
 
-
+//starting the game and clearing the screen of the start button.
  function startGame(){
      onQuestion=0;
      correctAnswers=0;
@@ -117,6 +125,7 @@ function resetTimer() {
     displayQuestionAnswers(onQuestion);
 };
 
+//function to display the question and aswers.
 function displayQuestionAnswers(index){
     $("#answers").show();
     $("#question").show();
@@ -128,7 +137,7 @@ function displayQuestionAnswers(index){
     $("#answers").append("<p class='answer p-2' answer='a4'>"+questions[index].a4 + "</p>");
 }
 
-
+//function to go to the next question/ 
 function nextQuestion(){
     onQuestion++;
     $("#status").empty();
@@ -136,15 +145,19 @@ function nextQuestion(){
     startTimer();
     displayQuestionAnswers(onQuestion);
 }
-
+//hide the reseet button before the program loads. should be early enough to keep the user from seeing.
 $("#reset").hide();
 
+//when the document is ready, we display the start button.
 $(document).ready(function() {
     $("#reset").hide();
+    //on clifk of the strt button we hide it and start the game.
     $("#startButton").on("click","button",function(){
         $("#startButton").hide();
         startGame();
     });
+    //on click of anything in the answer area, we pass that along to the class and get the element attribute of the selected answer.
+    //from this we decide if it wass the correct answer or not and increment the counter
     $("#answers").on("click", ".answer", function(){
         resetTimer();
         $("#answers").empty();
@@ -156,8 +169,9 @@ $(document).ready(function() {
         else{
             $("#status").text("You answered incorrectly. the correct answer was " + questions[onQuestion].correct + ".");
             wrongAnswers++;
-        }
-        
+        };
+
+        //check to see if we are on teh last question and clean up the screen or not. if it is we display the neg game stuff and if not we wait5s to display the next question
         if(onQuestion===(questions.length-1)){
             $("#status").append(" The game has ended.");
             $("#status").append("<p>Correct: " + correctAnswers + "&nbsp Incorrect: " + wrongAnswers + "&nbsp Unanswered: " + unanswered + "</p>");
@@ -173,6 +187,8 @@ $(document).ready(function() {
 
 
     });
+
+    //reset to clear the game screen and display the start button.
 
     $("#reset").on("click","button",function(){
         $("#reset").hide();

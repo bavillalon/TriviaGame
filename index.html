@@ -8,42 +8,42 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- My CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Eagle+Lake&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 
-    <title>Trivia Game</title>
+    <title>Tolkien Trivia!</title>
   </head>
   <body>
     <header>
-        <div class="container p-0 mb-2">
-             <h1>Trivia Game</h1>
+        <div class="container py-2 d-flex justify-content-center">
+             <h1 >T<img src="assets/images/oneRing.png">lkien Trivia!</h1>
         </div>
     </header>
-    <main class="container h-100">
-        <div class="row h-100">
-            <div id="game m-auto">
-                <div id="startButton" class="m-auto" >
-                    <button>
-                        <h3>Click to start!</h3>
-                    </button>
-                </div>
-                <div id="status"></div>
-                <div id="timer"></div>
-                <div id="question"></div>
-                <div id="answers"></div>
-                <div id="reset" >
-                    <button>
-                        <h3>reset</h3>
-                    </button>
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div id="game" class="d-flex col-md-6 p-4 justify-content-center flex-column">
+                    <div id="startButton">
+                        <div class="d-flex justify-content-center">
+                        <button class="p-2">
+                            <h5>Click to start!</h5>
+                        </button>
+                        </div>
+                    </div>
+                    <div id="status" class="mb-3"></div>
+                    <div id="timer"></div>
+                    <div id="question"></div>
+                    <div id="answers"></div>
+                    <div id="reset" class="mt-auto">
+                        <button class="p-2">
+                            <h5>Reset</h5>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-
-
     </main>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

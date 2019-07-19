@@ -1,11 +1,41 @@
-html{
-    min-height:100%;
-}
+
 
 body{
-    min-height: 100%;
+    background-image: url("../images/middleEarthMap.jpg");
+    background-size: 100%;
+    font-family: 'Eagle Lake', cursive;
+}
+
+main div.container{
+    margin-top: 10vh;
+}
+header{
+    background-color: #3c5a3c;
+    color: #c4c4c4;
+}
+h1 img{
+    height: 1em;
+}
+
+#game{
+    background-color: #c7a074;
+    min-height: 320px;
+    border-width: 5px;
+    border-radius: 10px;
+    border-style: inset;
+    border-color: #3c5a3c;
+
 }
 
 .answer:hover{
+    background-color: #3c5a3c;
+    color:#c4c4c4;
     cursor: pointer;
+}
+
+button{
+    border-radius: 8px;
+    background-color: #3c5a3c;
+    color:#c4c4c4;
+    border:none;
 }

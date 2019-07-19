@@ -16,7 +16,7 @@ var questions=[
             correct: "Goldberry"
         },
         {
-            q:"Which of these were or are not Maiar?",
+            q:"Which of these are not or ever were Maiar?",
             a1:"Balrogs",
             a2:"Istari",
             a3:"Wizards",
@@ -54,6 +54,9 @@ var questionInterval;
 var timerInterval;
 var onQuestion=0;
 var clockRunning=false;
+var correctAnswers=0;
+var wrongAnswers=0;
+var unanswered=0;
 
 function resetTimer() {
     clearInterval(questionInterval);
@@ -81,16 +84,20 @@ function resetTimer() {
     // DONE: Use the variable we just created to show the converted time in the "display" div.
     $("#timer").text(timer + " seconds remaining");
     if(timer===0){
+        unanswered++;
         clearInterval(questionInterval);
-        $("#timer").text("Time is up");
         $("#question").empty();
         $("#answers").empty();
-        $("#status").text("You did not answer. The correct answer was " + questions[onQuestion].correct);
+        $("#status").text("You did not answer. The correct answer was " + questions[onQuestion].correct + ".");
         if(onQuestion===(questions.length-1)){
+            resetTimer();
+            $("#status").append(" The game has ended.");
+            $("#status").append("<p>Correct: " + correctAnswers + "&nbsp Incorrect: " + wrongAnswers + "&nbsp Unanswered: " + unanswered + "</p>");
+            $("#status").append("<div class='d-block'> <img class='img-fluid' src='./assets/images/gandalf.gif'></div>");
             $("#answers").empty();
             $("#question").empty();
             $("#reset").show();
-            $("#reset").append("<p> the game has ended. Please click Reset to play again.</p>");
+            $("#reset").append("<p>Please click Reset to play again.</p>");
         }
         else{
             setTimeout(nextQuestion,5000);
@@ -101,6 +108,9 @@ function resetTimer() {
 
  function startGame(){
      onQuestion=0;
+     correctAnswers=0;
+     wrongAnswers=0;
+     unanswered=0;
     $("#status").empty();
     resetTimer();
     startTimer();
@@ -112,10 +122,10 @@ function displayQuestionAnswers(index){
     $("#question").show();
     $("#question").html("<h4>" + questions[onQuestion].q + "</h4>");
     $("#answers").empty();
-    $("#answers").append("<p class='answer' answer='a1'>"+questions[index].a1 + "</p>");
-    $("#answers").append("<p class='answer' answer='a2'>"+questions[index].a2 + "</p>");
-    $("#answers").append("<p class='answer' answer='a3'>"+questions[index].a3 + "</p>");
-    $("#answers").append("<p class='answer' answer='a4'>"+questions[index].a4 + "</p>");
+    $("#answers").append("<p class='answer p-2' answer='a1'>"+questions[index].a1 + "</p>");
+    $("#answers").append("<p class='answer p-2' answer='a2'>"+questions[index].a2 + "</p>");
+    $("#answers").append("<p class='answer p-2' answer='a3'>"+questions[index].a3 + "</p>");
+    $("#answers").append("<p class='answer p-2' answer='a4'>"+questions[index].a4 + "</p>");
 }
 
 
@@ -139,18 +149,23 @@ $(document).ready(function() {
         resetTimer();
         $("#answers").empty();
         $("#question").empty();
-        if($(this).attr("answer")===questions[onQuestion].correct){
+        if(questions[onQuestion][$(this).attr("answer")]===questions[onQuestion].correct){
             $("#status").text("You answered correctly!");
+            correctAnswers++;
         }
         else{
-            $("#status").text("You answered incorrectly. the correct answer was " + questions[onQuestion].correct);
+            $("#status").text("You answered incorrectly. the correct answer was " + questions[onQuestion].correct + ".");
+            wrongAnswers++;
         }
         
         if(onQuestion===(questions.length-1)){
+            $("#status").append(" The game has ended.");
+            $("#status").append("<p>Correct: " + correctAnswers + "&nbsp Incorrect: " + wrongAnswers + "&nbsp Unanswered: " + unanswered + "</p>");
+            $("#status").append("<div class='d-block'> <img class='img-fluid' src='./assets/images/gandalf.gif'></div>");
             $("#answers").empty();
             $("#question").empty();
             $("#reset").show();
-            $("#reset").append("<p> the game has ended. Please click Reset to play again.</p>");
+            $("#reset").append("<p>Please click Reset to play again.</p>");
         }
         else{
             setTimeout(nextQuestion,5000);
